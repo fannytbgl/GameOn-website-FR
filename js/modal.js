@@ -45,8 +45,8 @@ function validerNoms(nom) {
 
 // Valider quantité
 /**
- * Cette fonction prend un nom en paramètre et valide qu'il est au bon format
- * ici : deux caractères au minimum
+ * Cette fonction prend une quantité en paramètre et valide qu'elle est au bon format
+ * ici : un caractère numérique
  * @param {string} chiffre 
  * @return {boolean}
  */
@@ -58,6 +58,22 @@ function validerQuantite(chiffre) {
     return false
   }
 }
+
+// Valider email
+/**
+ * Cette fonction prend un email en paramètre et valide qu'il est au bon format. 
+ * @param {string} email 
+ * @return {boolean}
+ */
+function validerEmail(email) {
+  let emailRegExp = new RegExp("[a-z0-9._-]+@[a-z0-9._-]+\\.[a-z0-9._-]+")
+  if (emailRegExp.test(email)) {
+      return true
+  }
+  return false
+}
+
+
 
 // form 
 form.addEventListener("submit", (event) => {
@@ -89,6 +105,13 @@ form.addEventListener("submit", (event) => {
     console.log("quantité valide")
   } else {
     console.log("quantité non valide")
+  }
+
+  // vérifie que l'email est au bon format
+  if (validerEmail(email)) {
+    console.log("email valide")
+  } else {
+    console.log("email non valide")
   }
   
 })
