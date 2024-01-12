@@ -39,7 +39,7 @@ function validerNoms(nom) {
   if (nom.length > 2) {
     return true
   } else {
-    return false
+    throw new Error("Veuillez entrer 2 caractères ou plus pour le champ du nom.")
   }
 }
 
@@ -55,7 +55,7 @@ function validerQuantite(chiffre) {
   if (/^\d+$/.test(chiffre)) {
     return true
   } else {
-    return false
+    throw new Error("Veuillez renseigner une valeur numérique.")
   }
 }
 
@@ -69,18 +69,20 @@ function validerEmail(email) {
   let emailRegExp = new RegExp("[a-z0-9._-]+@[a-z0-9._-]+\\.[a-z0-9._-]+")
   if (emailRegExp.test(email)) {
       return true
+  } else {
+    throw new Error("Veuillez entrer une adresse e-mail valide.")
   }
-  return false
 }
 
 
 
 // form 
 form.addEventListener("submit", (event) => {
+
   // empêche la page de se recharger par défauts (n'éfface pas les données du formulaire)
   event.preventDefault();
 
-  // elements 
+  // elements
   let baliseFirstName = document.getElementById("first")
   let firstName = baliseFirstName.value
 
@@ -93,34 +95,25 @@ form.addEventListener("submit", (event) => {
   let baliseQuantity = document.getElementById("quantity")
   let quantity = baliseQuantity.value
 
-  // vérifie les noms : aucune actions directes pour l'instant
-  if (validerNoms(firstName) && validerNoms(lastName)) {
-    console.log("noms valides")
-  } else {
-    console.log("prénoms invalides")
-  }
-  
-  // vérifie que la quantité de concours est bien un caractère numérique
-  if (validerQuantite(quantity)) {
-    console.log("quantité valide")
-  } else {
-    console.log("quantité non valide")
+  // gestion des erreurs
+  try {
+  validerNoms(firstName)
+  validerNoms(lastName)
+  validerEmail(email)
+  validerQuantite(quantity)
+
+  } catch(error) {
+    console.log(error.message)
   }
 
-  // vérifie que l'email est au bon format
-  if (validerEmail(email)) {
-    console.log("email valide")
-  } else {
-    console.log("email non valide")
-  }
-  
+  // gestion des validations
   if (validerEmail(email) && validerNoms(firstName) && validerNoms(lastName) && validerQuantite(quantity)) {
     console.log("formulaire valide")
     form.submit()
   } else {
     console.log("formulaire non valide")
   }
-  
+
 })
 
 
