@@ -77,7 +77,7 @@ function validerEmail(email) {
 
 // form 
 form.addEventListener("submit", (event) => {
-  // empêche la page de se recharger par défauts
+  // empêche la page de se recharger par défauts (n'éfface pas les données du formulaire)
   event.preventDefault();
 
   // elements 
@@ -112,6 +112,13 @@ form.addEventListener("submit", (event) => {
     console.log("email valide")
   } else {
     console.log("email non valide")
+  }
+  
+  if (validerEmail(email) && validerNoms(firstName) && validerNoms(lastName) && validerQuantite(quantity)) {
+    console.log("formulaire valide")
+    form.submit()
+  } else {
+    console.log("formulaire non valide")
   }
   
 })
