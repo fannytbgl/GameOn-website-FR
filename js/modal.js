@@ -34,7 +34,6 @@ function launchModal() {
  * @param {string} prenom
  * @return {boolean}
  */
-
 function validerPrenom(prenom) {
   if (prenom.length > 2) {
     return true
@@ -50,7 +49,6 @@ function validerPrenom(prenom) {
  * @param {string} nom 
  * @return {boolean}
  */
-
 function validerNom(nom) {
   if (nom.length > 2) {
     return true
@@ -66,7 +64,6 @@ function validerNom(nom) {
  * @param {string} chiffre 
  * @return {boolean}
  */
-
 function validerQuantite(chiffre) {
   if (/^\d+$/.test(chiffre)) {
     return true
@@ -91,15 +88,32 @@ function validerEmail(email) {
 }
 
 // Valider bouton radio
-
+/**
+ * Cette fonction prend un email en paramètre et valide qu'il est au bon format. 
+ * @param {NodeList} radioButtons 
+ * @return {boolean}
+ */
 function validerRadio(radioButtons) {
   for (let i = 0; i < radioButtons.length; i++) {
     if (radioButtons[i].checked) {
       return true;
     }
   }
+  throw new Error("Vous devez choisir une option.");
+}
 
-  throw new Error("Veuillez sélectionner une option.");
+// Valider conditions générales
+/**
+ * Cette fonction prend en paramètre l'élément de case à cocher des conditions générales
+ * et valide s'il est coché.
+ * @param {HTMLInputElement} checkboxElement 
+ * @return {boolean}
+ */
+function validerConditionsGenerales(checkboxElement) {
+  if (checkboxElement.checked) {
+    return true
+  }
+  throw new Error("Vous devez vérifier que vous acceptez les termes et conditions.")
 }
 
 // form 
@@ -122,7 +136,8 @@ form.addEventListener("submit", (event) => {
   let quantity = baliseQuantity.value
 
   let radioButtons = document.getElementsByName("location")
-  console.log(radioButtons)
+  
+  let conditionsGenerales = document.getElementById("checkbox1")
 
 // gestion des erreurs
 let erreurs = [];
@@ -147,6 +162,18 @@ try {
 
 try {
   validerQuantite(quantity);
+} catch (error) {
+  erreurs.push(error.message);
+}
+
+try {
+  validerRadio(radioButtons);
+} catch (error) {
+  erreurs.push(error.message);
+}
+
+try {
+  validerConditionsGenerales(conditionsGenerales);
 } catch (error) {
   erreurs.push(error.message);
 }
