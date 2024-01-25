@@ -74,7 +74,17 @@ function validerEmail(email) {
   }
 }
 
+// Valider bouton radio
 
+function validerRadio(radioButtons) {
+  for (let i = 0; i < radioButtons.length; i++) {
+    if (radioButtons[i].checked) {
+      return true;
+    }
+  }
+
+  throw new Error("Veuillez sélectionner une option.");
+}
 
 // form 
 form.addEventListener("submit", (event) => {
@@ -95,25 +105,51 @@ form.addEventListener("submit", (event) => {
   let baliseQuantity = document.getElementById("quantity")
   let quantity = baliseQuantity.value
 
-  // gestion des erreurs
-  try {
-  validerNoms(firstName)
-  validerNoms(lastName)
-  validerEmail(email)
-  validerQuantite(quantity)
+  let radioButtons = document.getElementsByName("location")
+  console.log(radioButtons)
 
-  } catch(error) {
-    console.log(error.message)
-  }
+// gestion des erreurs
+let erreurs = [];
 
-  // gestion des validations
-  if (validerEmail(email) && validerNoms(firstName) && validerNoms(lastName) && validerQuantite(quantity)) {
-    console.log("formulaire valide")
-    form.submit()
-  } else {
-    console.log("formulaire non valide")
-  }
+try {
+  validerNoms(firstName);
+} catch (error) {
+  erreurs.push(error.message);
+}
 
+try {
+  validerNoms(lastName);
+} catch (error) {
+  erreurs.push(error.message);
+}
+
+try {
+  validerEmail(email);
+} catch (error) {
+  erreurs.push(error.message);
+}
+
+try {
+  validerQuantite(quantity);
+} catch (error) {
+  erreurs.push(error.message);
+}
+
+// Afficher toutes les erreurs
+if (erreurs.length > 0) {
+  console.log("Erreurs de validation :");
+  erreurs.forEach((erreur) => {
+    console.log(erreur);
+  });
+} else {
+  // Aucune erreur, soumettre le formulaire
+  console.log("Formulaire valide, soumission en cours...");
+  form.submit();
+}
+
+  
+
+  
 })
 
 
