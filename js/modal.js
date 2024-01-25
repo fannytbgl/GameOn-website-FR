@@ -27,7 +27,23 @@ function launchModal() {
   modalbg.style.display = "block";
 }
 
-// Valider noms
+// Valider prénom
+/**
+ * Cette fonction prend un nom en paramètre et valide qu'il est au bon format
+ * ici : deux caractères au minimum
+ * @param {string} prenom
+ * @return {boolean}
+ */
+
+function validerPrenom(prenom) {
+  if (prenom.length > 2) {
+    return true
+  } else {
+    throw new Error("Veuillez entrer 2 caractères ou plus pour le champ du prénom.")
+  }
+}
+
+// Valider nom
 /**
  * Cette fonction prend un nom en paramètre et valide qu'il est au bon format
  * ici : deux caractères au minimum
@@ -35,7 +51,7 @@ function launchModal() {
  * @return {boolean}
  */
 
-function validerNoms(nom) {
+function validerNom(nom) {
   if (nom.length > 2) {
     return true
   } else {
@@ -112,13 +128,13 @@ form.addEventListener("submit", (event) => {
 let erreurs = [];
 
 try {
-  validerNoms(firstName);
+  validerPrenom(firstName);
 } catch (error) {
   erreurs.push(error.message);
 }
 
 try {
-  validerNoms(lastName);
+  validerNom(lastName);
 } catch (error) {
   erreurs.push(error.message);
 }
