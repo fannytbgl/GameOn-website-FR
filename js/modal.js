@@ -119,8 +119,17 @@ function validerConditionsGenerales(checkboxElement) {
 // Gestion des messages d'erreur
 let firstBody = document.querySelector('.formData label[for="first"]').closest('.formData')
 let lastBody = document.querySelector('.formData label[for="last"]').closest('.formData')
+let emailBody = document.querySelector('.formData label[for="email"]').closest('.formData')
+let quantityBody = document.querySelector('.formData label[for="quantity"]').closest('.formData')
+let locationBody = document.querySelector('.formData label[for="location"]').closest('.formData')
+let conditionsBody = document.querySelector('.formData label[for="checkbox1"]').closest('.formData')
+
 let firstContenu = "Veuillez entrer 2 caractères ou plus pour le champ du prénom."
 let lastContenu = "Veuillez entrer 2 caractères ou plus pour le champ du nom."
+let emailContenu = "Veuillez entrer une adresse e-mail valide."
+let quantityContenu = "Veuillez renseigner une valeur numérique."
+let locationContenu = "Vous devez choisir une option."
+let conditionsContenu = "Vous devez vérifier que vous acceptez les termes et conditions."
 
 function afficherMessageErreur(body, contenu, errorId) {
   let newSpan = document.getElementById(errorId)
@@ -186,26 +195,34 @@ try {
 
 try {
   validerEmail(email);
+  supprimerMessageErreur("emailErrorSpan")
 } catch (error) {
   erreurs.push(error.message);
+  afficherMessageErreur(emailBody, emailContenu, "emailErrorSpan");
 }
 
 try {
   validerQuantite(quantity);
+  supprimerMessageErreur("quantityErrorSpan")
 } catch (error) {
   erreurs.push(error.message);
+  afficherMessageErreur(quantityBody, quantityContenu, "quantityErrorSpan");
 }
 
 try {
   validerRadio(radioButtons);
+  supprimerMessageErreur("locationErrorSpan")
 } catch (error) {
   erreurs.push(error.message);
+  afficherMessageErreur(locationBody, locationContenu, "locationErrorSpan");
 }
 
 try {
   validerConditionsGenerales(conditionsGenerales);
+  supprimerMessageErreur("conditionsErrorSpan")
 } catch (error) {
   erreurs.push(error.message);
+  afficherMessageErreur(conditionsBody, conditionsContenu, "conditionsErrorSpan");
 }
 
 // Afficher toutes les erreurs
