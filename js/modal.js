@@ -35,7 +35,7 @@ function launchModal() {
  * @return {boolean}
  */
 function validerPrenom(prenom) {
-  if (prenom.length > 2) {
+  if (prenom.length >= 2) {
     return true
   } else {
     throw new Error("Veuillez entrer 2 caractères ou plus pour le champ du prénom.")
@@ -50,7 +50,7 @@ function validerPrenom(prenom) {
  * @return {boolean}
  */
 function validerNom(nom) {
-  if (nom.length > 2) {
+  if (nom.length >= 2) {
     return true
   } else {
     throw new Error("Veuillez entrer 2 caractères ou plus pour le champ du nom.")
@@ -116,6 +116,32 @@ function validerConditionsGenerales(checkboxElement) {
   throw new Error("Vous devez vérifier que vous acceptez les termes et conditions.")
 }
 
+// Gestion des messages d'erreur
+let firstBody = document.querySelector('.formData label[for="first"]').closest('.formData')
+let lastBody = document.querySelector('.formData label[for="last"]').closest('.formData')
+let firstContenu = "Veuillez entrer 2 caractères ou plus pour le champ du prénom."
+let lastContenu = "Veuillez entrer 2 caractères ou plus pour le champ du nom."
+
+function afficherMessageErreur(body, contenu, errorId) {
+  let newSpan = document.getElementById(errorId)
+
+  if (!newSpan) {
+    let newSpan = document.createElement("span")
+    newSpan.id = errorId
+    newSpan.textContent = contenu
+    body.appendChild(newSpan)
+  }
+  
+}
+
+function supprimerMessageErreur(errorId) {
+  let newSpan = document.getElementById(errorId);
+
+  if (newSpan) {
+    newSpan.remove();
+  }
+}
+
 // form 
 form.addEventListener("submit", (event) => {
 
@@ -144,14 +170,18 @@ let erreurs = [];
 
 try {
   validerPrenom(firstName);
+  supprimerMessageErreur("firstErrorSpan")
 } catch (error) {
   erreurs.push(error.message);
+  afficherMessageErreur(firstBody, firstContenu, "firstErrorSpan");
 }
 
 try {
   validerNom(lastName);
+  supprimerMessageErreur("lastErrorSpan")
 } catch (error) {
   erreurs.push(error.message);
+  afficherMessageErreur(lastBody, lastContenu, "lastErrorSpan");
 }
 
 try {
