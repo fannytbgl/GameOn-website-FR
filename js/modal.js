@@ -13,11 +13,12 @@ const modalCloseBtn = document.querySelector(".close");
 const modalBtn = document.querySelectorAll(".modal-btn");
 const formData = document.querySelectorAll(".formData");
 const form = document.querySelector('form');
+const confirmationModal = document.getElementById("confirmationModal");
 
 // launch modal event
 modalBtn.forEach((btn) => btn.addEventListener("click", launchModal));
 
-// close modal event (Issue #1)
+// close modal event with button(Issue #1)
 modalCloseBtn.addEventListener("click", (event) => {
   modalbg.style.display = "none";
 })
@@ -25,6 +26,16 @@ modalCloseBtn.addEventListener("click", (event) => {
 // launch modal form
 function launchModal() {
   modalbg.style.display = "block";
+}
+
+// launch confirmation modal
+function launchConfirmationModal() {
+  confirmationModal.style.display = "block";
+}
+
+// close confirmation modal
+function closeConfirmationModal() {
+  confirmationModal.style.display = "none";
 }
 
 // Valider prénom
@@ -232,10 +243,12 @@ if (erreurs.length > 0) {
     console.log(erreur);
   });
 } else {
-  // Aucune erreur, soumettre le formulaire
-  console.log("Formulaire valide, soumission en cours...");
-  form.submit();
+  modalbg.style.display = "none";
+  launchConfirmationModal();
 }
+
+
+
 
   
 
