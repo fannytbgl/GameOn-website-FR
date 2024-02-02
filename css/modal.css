@@ -183,6 +183,13 @@ main {
   padding-top: 10px;
 }
 
+.confirmationModalContent {
+  padding-right: 10px;
+  padding-left: 10px;
+  padding-bottom: 10px;
+  font-size: 1em;
+}
+
 .modal-body {
   padding: 15px 8%;
   margin: 15px auto;
@@ -208,6 +215,12 @@ input {
   font-size: 20px;
   height: 48px;
 }
+
+.formData span {
+  color: #e54858;
+  font-size: 0.6em;
+}
+
 .formData[data-error]::after {
   content: attr(data-error);
   font-size: 0.4em;
@@ -220,18 +233,19 @@ input {
   opacity: 0;
   transition: 0.3s;
 }
+
 .formData[data-error-visible="true"]::after {
   opacity: 1;
 }
 .formData[data-error-visible="true"] .text-control {
   border: 2px solid #e54858;
 }
-/* 
-input[data-error]::after {
-    content: attr(data-error);
-    font-size: 0.4em;
-    color: red;
-} */
+
+.formData label[for="location"],
+.formData label[for="quantity"] {
+  padding-top: 11px;
+}
+
 .checkbox-label,
 .checkbox2-label {
   position: relative;
@@ -461,6 +475,7 @@ input[data-error]::after {
   height: 100%;
   display: block;
   padding: 0;
+  object-fit: cover;
 }
 .copyrights {
   color: #fe142f;
