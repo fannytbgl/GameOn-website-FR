@@ -511,12 +511,10 @@ footer {
   .hero-headline {
     font-size: 3rem;
     white-space: normal;
-    width: 100vw;
     padding-right: 15%;
   }
   .hero-text {
     font-size: 1.2rem;
-    width: 100vw;
     padding-right: 15%;
   }
   .hero-img img {
