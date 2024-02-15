@@ -170,10 +170,10 @@ form.addEventListener("submit", (event) => {
 
   // elements
   let baliseFirstName = document.getElementById("first")
-  let firstName = baliseFirstName.value
+  let firstName = baliseFirstName.value.trim();
 
   let baliseLastName = document.getElementById("last")
-  let lastName = baliseLastName.value
+  let lastName = baliseLastName.value.trim();
 
   let baliseEmail = document.getElementById("email")
   let email = baliseEmail.value
